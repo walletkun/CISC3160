@@ -126,7 +126,7 @@ class Parser:
         self.position += 1
 
         # Expects an assignment operator
-        if self.tokens[self.position].token_type != TokenType.ASSIGNMENT:
+        if self.position >= len(self.tokens) or self.tokens[self.position].token_type != TokenType.ASSIGNMENT:
             raise ValueError("Expected assignment operator")
         self.position += 1
 
@@ -134,7 +134,7 @@ class Parser:
         value = self.parse_expression(symbol_table)
 
         # Expect a semicolon
-        if self.tokens[self.position].token_type != TokenType.SEMICOLON:
+        if self.position >= len(self.tokens) or self.tokens[self.position].token_type != TokenType.SEMICOLON:
             raise ValueError("Expected semicolon")
         self.position += 1
 
@@ -290,6 +290,7 @@ if __name__ == '__main__':
         "x = 5; y = 3; z = (x + y) * 2;",
         "a = 10; b = -5; c = a * b;",
         "p = 20; q = 4; r = (p - q) * (p + q);",
+        'x_2 = 0'
     ]
 
     for i, test in enumerate(test_cases, 1):
