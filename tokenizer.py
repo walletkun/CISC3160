@@ -290,7 +290,10 @@ if __name__ == '__main__':
         "x = 5; y = 3; z = (x + y) * 2;",
         "a = 10; b = -5; c = a * b;",
         "p = 20; q = 4; r = (p - q) * (p + q);",
-        'x_2 = 0'
+        'x_2 = 0',
+        "x = 1; y = 2; z = ---(x+y)*(x+-y);",
+        'x = 001',
+        'x = 0 y = x; z = ---(x+y);'
     ]
 
     for i, test in enumerate(test_cases, 1):
