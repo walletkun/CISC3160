@@ -1,0 +1,79 @@
+import re
+
+
+#Tokenizer types
+
+TOKEN_TYPES = {
+    'IDENTIFIER': 1,
+    'LITERAL': 2,
+    'PLUS': 3,
+    'MINUS': 4,
+    'MULTIPLY': 5,
+    'LEFT_PAREN': 6,
+    'RIGHT_PAREN': 7,
+    'ASSIGNMENT': 8,
+}
+
+
+#Token Regex
+TOKEN_REGEX = {
+    'IDENTIFER' : r'[a-zA-Z_][a-zA-Z0-9_]*',
+    'LITERAL': r'[1-9][0-9]*|0',
+    'PLUS': r'^\+',
+    'MINUS': r'^-',
+    'MULTIPLY': r'^\*',
+    'LEFT_PAREN': r'^\(',
+    'RIGHT_PAREN': r'^\)',
+    'ASSIGNMENT': r'^=',
+}
+
+
+#Token Class
+class Token:
+    def __init__(self, token_type, value):
+        self.token_type = token_type
+        self.value = value
+
+    def __str__(self):
+        return f'Token({self.token_type}, {self.value})'
+    
+
+#Tokenizer Class
+class Tokenizer:
+    def __init__(self, source_code):
+        self.source_code = source_code
+        self.position = 0
+
+    def tokenize(self):
+        tokens = []
+        while self.position < len(self.source_code):
+            while self.position < len(self.source_code) and self.source_code[self.position].isspace():
+                self.position += 1
+            match = self.match_token()
+            if match:
+                tokens.append(match)
+            else:
+                raise SyntaxError(f'Invalid character found: {self.position}')
+            
+        return tokens
+    
+    def match_token(self):
+        for token_type, regex in TOKEN_REGEX.items():
+            match = re.match(regex, self.source_code[self.position:])
+            print(match)
+            if match:
+                token = Token(token_type, match.group())
+                self.position += match.end()
+                return token
+        return None
+    
+if __name__ == '__main__':
+    def main():
+        source_code = 'x = 5 + 3 * (2 - 1)'
+        tokenizer = Tokenizer(source_code)
+        tokens = tokenizer.tokenize()
+
+        for token in tokens:
+            print(token)
+
+    main()
