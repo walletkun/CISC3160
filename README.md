@@ -136,8 +136,7 @@ git push origin feature-name
 5. Open a PR (pull request)
 
 # License
-This project is licensed under the MIT License. See the LICENSE file for details.
-```Bash
+## This project is licensed under the MIT License. See the LICENSE file for details.
 Feel free to update sections like **repository URL**, **contributing guidelines**, or **license** based on your project details. Let me know if you need further refinements!
-```
+
 
